@@ -13,4 +13,12 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
 
     @Query("SELECT t FROM Todo t WHERE t.status = :status")
     List<Todo> findByStatus(@Param("status") Todo.Status status);
+
+    List<Todo> findAllByOrderByPriorityAscCreatedAtDesc();
+
+    List<Todo> findAllByStatusOrderByCreatedAtAsc(Todo.Status status);
+
+    List<Todo> findByStatusNotDone();
+
+    List<Todo> findByDueDateBeforeAndStatusNotDone(java.time.LocalDate dueDate);
 }
