@@ -65,12 +65,12 @@ public class TodoService {
 
 
     public List<Todo> getActiveTasks() {
-        return todoRepository.findByStatusNotDone();
+        return todoRepository.findByStatusNot(Todo.Status.DONE);
     }
 
 
     public List<Todo> getOverdueTasks() {
-        return todoRepository.findByDueDateBeforeAndStatusNotDone(java.time.LocalDate.now());
+        return todoRepository.findByDueDateBeforeAndStatusNot(java.time.LocalDate.now(), Todo.Status.DONE);
     }
 
 

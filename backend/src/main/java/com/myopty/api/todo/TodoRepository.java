@@ -18,7 +18,8 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
 
     List<Todo> findAllByStatusOrderByCreatedAtAsc(Todo.Status status);
 
-    List<Todo> findByStatusNotDone();
+    List<Todo> findByStatusNot(Todo.Status status);
 
-    List<Todo> findByDueDateBeforeAndStatusNotDone(java.time.LocalDate dueDate);
+    @Query("SELECT t FROM Todo t WHERE t.dueDate < ?1 AND t.status <> ?2")
+    List<Todo> findByDueDateBeforeAndStatusNot(java.time.LocalDate dueDate, Todo.Status status);
 }
